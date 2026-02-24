@@ -1,6 +1,5 @@
 """Tests for the audit logging system."""
 
-import json
 import tempfile
 from pathlib import Path
 

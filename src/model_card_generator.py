@@ -7,7 +7,6 @@ Creates structured model cards following industry best practices
 from __future__ import annotations
 
 import argparse
-import json
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -15,7 +14,6 @@ from typing import Any
 
 import yaml
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
 
 MODEL_CARD_TEMPLATE = """# Model Card: {{ model.name }}
 

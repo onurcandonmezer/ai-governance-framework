@@ -147,7 +147,10 @@ class AuditLogger:
         limit: int = 100,
     ) -> list[AuditEvent]:
         """Query audit events with optional filters."""
-        query = "SELECT id, timestamp, event_type, system_name, actor, details, checksum FROM audit_log WHERE 1=1"
+        query = (
+            "SELECT id, timestamp, event_type, system_name, actor, details, checksum"
+            " FROM audit_log WHERE 1=1"
+        )
         params: list[Any] = []
 
         if system_name:
@@ -183,8 +186,8 @@ class AuditLogger:
         """Verify the integrity of the entire audit chain."""
         with sqlite3.connect(self.db_path) as conn:
             rows = conn.execute(
-                "SELECT timestamp, event_type, system_name, actor, details, prev_checksum, checksum "
-                "FROM audit_log ORDER BY id ASC"
+                "SELECT timestamp, event_type, system_name, actor, details,"
+                " prev_checksum, checksum FROM audit_log ORDER BY id ASC"
             ).fetchall()
 
         if not rows:
@@ -213,7 +216,11 @@ class AuditLogger:
             "valid": len(broken_links) == 0,
             "total_events": len(rows),
             "broken_links": broken_links,
-            "message": "Audit chain integrity verified" if not broken_links else "INTEGRITY VIOLATION DETECTED",
+            "message": (
+                "Audit chain integrity verified"
+                if not broken_links
+                else "INTEGRITY VIOLATION DETECTED"
+            ),
         }
 
     def export_markdown(self, system_name: str | None = None) -> str:

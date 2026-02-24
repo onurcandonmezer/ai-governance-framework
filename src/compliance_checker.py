@@ -12,8 +12,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-import yaml
-
 
 @dataclass
 class ChecklistItem:
@@ -67,7 +65,8 @@ class ComplianceChecklist:
         ]
 
         current_priority = None
-        for item in sorted(self.items, key=lambda x: {"critical": 0, "high": 1, "medium": 2, "low": 3}[x.priority]):
+        priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
+        for item in sorted(self.items, key=lambda x: priority_order[x.priority]):
             if item.priority != current_priority:
                 current_priority = item.priority
                 lines.extend([f"## {current_priority.upper()} Priority", ""])
@@ -96,7 +95,7 @@ EU_AI_ACT_HIGH_RISK = [
     ChecklistItem(
         id="EU-HR-01",
         requirement="Risk Management System",
-        description="Establish and maintain a risk management system throughout the AI system lifecycle",
+        description="Establish and maintain a risk management system throughout the lifecycle",
         regulation="eu_ai_act",
         article="Article 9",
         priority="critical",
@@ -128,7 +127,7 @@ EU_AI_ACT_HIGH_RISK = [
     ChecklistItem(
         id="EU-HR-05",
         requirement="Transparency & Information",
-        description="Provide clear information to deployers about system capabilities and limitations",
+        description="Provide clear information to deployers about capabilities and limitations",
         regulation="eu_ai_act",
         article="Article 13",
         priority="high",
@@ -230,7 +229,7 @@ NIST_AI_RMF_REQUIREMENTS = [
     ChecklistItem(
         id="NIST-GOV-01",
         requirement="AI Governance Structure",
-        description="Establish organizational AI governance structure with clear roles and responsibilities",
+        description="Establish AI governance structure with clear roles and responsibilities",
         regulation="nist_ai_rmf",
         article="GOVERN 1.1",
         priority="critical",
