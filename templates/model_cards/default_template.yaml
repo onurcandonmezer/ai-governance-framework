@@ -1,0 +1,77 @@
+name: "Example Classification Model"
+version: "1.0"
+date: "2024-01-15"
+owner: "AI Team"
+model_type: "Text Classification"
+architecture: "Fine-tuned Transformer"
+framework: "PyTorch"
+license: "Proprietary"
+
+description: >
+  A text classification model designed for categorizing customer support
+  tickets into predefined categories for routing and prioritization.
+
+intended_uses:
+  - "Automatic categorization of customer support tickets"
+  - "Priority assignment for incoming requests"
+  - "Routing tickets to appropriate department"
+
+out_of_scope_uses:
+  - "Making final decisions without human review"
+  - "Processing non-English text"
+  - "Sentiment analysis or emotion detection"
+
+target_users:
+  - "Customer support team leads"
+  - "IT operations team"
+
+training_data_description: >
+  Trained on 50,000 anonymized customer support tickets collected
+  between 2022-2023. Data was reviewed for PII and de-identified.
+
+training_data_stats:
+  Total Samples: "50,000"
+  Train/Val/Test Split: "70/15/15"
+  Number of Categories: "12"
+  Language: "English"
+  Source: "Internal ticketing system"
+
+metrics:
+  - name: "Accuracy"
+    value: "92.3%"
+    description: "Overall classification accuracy on test set"
+  - name: "F1 Score (Macro)"
+    value: "0.89"
+    description: "Macro-averaged F1 across all categories"
+  - name: "Latency (p95)"
+    value: "45ms"
+    description: "95th percentile inference latency"
+
+performance_by_group:
+  - group: "Technical Issues"
+    metric: "F1"
+    value: "0.94"
+  - group: "Billing Inquiries"
+    metric: "F1"
+    value: "0.91"
+  - group: "General Questions"
+    metric: "F1"
+    value: "0.82"
+
+limitations:
+  - "Performance degrades on tickets mixing multiple categories"
+  - "Not validated for languages other than English"
+  - "May underperform on newly emerging issue categories"
+
+bias_considerations:
+  - "Tested for consistent performance across customer segments"
+  - "No significant performance disparities identified across geographic regions"
+  - "Ongoing monitoring for category-level bias"
+
+risk_mitigations:
+  - "Human review required for low-confidence predictions (< 0.7)"
+  - "Monthly performance audits with updated test sets"
+  - "Feedback loop for misclassified tickets"
+
+contact: "ai-team@company.com"
+update_frequency: "Quarterly"
