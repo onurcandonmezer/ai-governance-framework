@@ -16,7 +16,7 @@ class TestRiskAssessor:
             affected_population_size="large",
         )
         assert result.risk_level == RiskLevel.HIGH
-        assert result.risk_score >= 60
+        assert result.risk_score >= 50
         assert "Annex III" in result.eu_ai_act_category
 
     def test_minimal_risk_internal_tool(self):

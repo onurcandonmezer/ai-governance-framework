@@ -112,7 +112,7 @@ class AuditLogger:
             valid = ", ".join(sorted(self.VALID_EVENT_TYPES))
             raise ValueError(f"Invalid event type: {event_type}. Valid types: {valid}")
 
-        timestamp = datetime.utcnow().isoformat() + "Z"
+        timestamp = datetime.now(tz=__import__("datetime").timezone.utc).isoformat()
         details_json = json.dumps(details or {}, sort_keys=True)
         prev_checksum = self._get_last_checksum()
 
@@ -222,7 +222,7 @@ class AuditLogger:
         lines = [
             "# Audit Trail Report",
             "",
-            f"**Generated:** {datetime.utcnow().isoformat()}Z",
+            f"**Generated:** {datetime.now(tz=__import__('datetime').timezone.utc).isoformat()}",
             f"**Total Events:** {len(events)}",
             "",
             "| # | Timestamp | Event Type | System | Actor | Checksum |",

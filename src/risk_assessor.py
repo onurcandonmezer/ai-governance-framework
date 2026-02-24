@@ -269,9 +269,9 @@ class RiskAssessor:
     def _determine_risk_level(self, score: float, domain: str) -> RiskLevel:
         if domain in PROHIBITED_DOMAINS:
             return RiskLevel.UNACCEPTABLE
-        if score >= 70:
+        if score >= 65 or domain in HIGH_RISK_DOMAINS:
             return RiskLevel.HIGH
-        if score >= 40:
+        if score >= 35:
             return RiskLevel.LIMITED
         return RiskLevel.MINIMAL
 
